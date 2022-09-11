@@ -6,7 +6,7 @@
   background-position: center;
 }
 
-.header_light-theme {
+.header_theme_light {
   background-image: none;
 }
 
@@ -67,7 +67,7 @@
 
 /* 640 */
 @media screen and (max-width: 640px) {
-  .header_dark-theme {
+  .header_theme_dark {
     background-color: #1A1B22;
     height: 536px;
   }

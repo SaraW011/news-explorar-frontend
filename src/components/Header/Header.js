@@ -17,8 +17,8 @@ function Header(props) {
     <header
       className={
         location.pathname === "/saved-news"
-          ? "header header_light-theme"
-          : "header header_dark-theme"
+          ? "header header_theme_light"
+          : "header header_theme_dark"
       }
     >
       <div
