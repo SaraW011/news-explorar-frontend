@@ -1,7 +1,5 @@
 import PopupWindow from "../PopupWindow/PopupWindow";
 
-// import { usePopupContext } from "../../contexts/PopupContext";
-
 function PopupWithForm(props) {
   return (
     <PopupWindow>
@@ -34,14 +32,12 @@ function PopupWithForm(props) {
           </button>
 
           <p className="popup__form-text">
-            or{" "}
-            <span className="popup__form-link"
-            //  onClick={
-            //  }
-             >
-              {props.linkTitle}
-             
-            </span>
+            or <button 
+            className="popup__form-alternate"
+            onClick={props.switchFormBtn}
+            >
+            {props.linkTitle}
+            </button>
           </p>
         </form>
       </div>

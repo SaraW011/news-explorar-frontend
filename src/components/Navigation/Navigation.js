@@ -18,8 +18,8 @@ function Navigation(props) {
             props.isMobileButtonOpen
             ? "nav__link-home" 
             :  currentPath.includes(`/saved-news`)
-            ? "nav__link-home nav__link-home_type-dark"
-            : "nav__link-home nav__link-home_type-light"
+            ? "nav__link-home nav__link-home_theme_dark"
+            : "nav__link-home nav__link-home_theme_light"
           }`}
         >
           Home
@@ -36,11 +36,11 @@ function Navigation(props) {
             props.isMobileButtonOpen
             ? "nav__login-button"
             :  currentPath.includes(`/saved-news`)
-            ? "nav__login-button nav__login-button_type-dark"
+            ? "nav__login-button nav__login-button_theme_dark"
             : "nav__login-button"
           }`}
 
-          onClick={props.isPopupOpen}
+          onClick={props.isSigninPopupOpen}
         >
           {loggedIn ? props.user.name : "Sign in"}
 

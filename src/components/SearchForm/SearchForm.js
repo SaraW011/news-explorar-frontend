@@ -1,16 +1,16 @@
 function SearchForm() {
   return (
-    <div className="search__form">
-      <form className="search__input">
+    <div className="header__search-form">
+      <form className="header__search-input">
         <input
           name="search-input"
-          className="search__input-field"
+          className="header__search-input-field"
           type="text"
           placeholder="Enter topic"
           required
         />
 
-        <button className="search__button"
+        <button className="header__search-button"
          type="submit">
           Search
         </button>

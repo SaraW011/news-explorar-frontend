@@ -1,68 +1,92 @@
-import React, { useEffect, useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 // import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 // import { AuthContext } from "../../contexts/AuthContext";
-// import { PopupProvider } from "../../contexts/PopupContext";
 
-import Header from '../Header/Header';
-import Main from '../Main/Main';
-import Footer from '../Footer/Footer';
-import SavedNews from '../SavedNews/SavedNews';
-import SigninForm from '../SigninForm/SigninForm';
+import SigninForm from "../SigninForm/SigninForm";
+import SignupForm from "../SignupForm/SignupForm";
+
+import Header from "../Header/Header";
+import Main from "../Main/Main";
+import Footer from "../Footer/Footer";
+import SavedNews from "../SavedNews/SavedNews";
 
 function App() {
-    // AUTH states
-    // const [currentUser, setCurrentUser] = useState({});
-    const [loggedIn, ] = useState(false);
+  // AUTH states
+  // const [currentUser, setCurrentUser] = useState({});
+  const [loggedIn] = useState(false);
 
-    // POPUP visibility states:
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
+  // POPUP visibility states:
+  const [isSigninPopupOpen, setSigninPopupOpen] = useState(false);
 
-    useEffect(() => {
-        if (loggedIn) {
-            Navigate('/');
-        }
-    }, [loggedIn]);
+  const [isSignupPopupOpen, setSignupPopupOpen] = useState(false);
 
-    function closeAllPopups() {
-        setIsPopupOpen(false);
+  useEffect(() => {
+    if (loggedIn) {
+      Navigate("/");
     }
+  }, [loggedIn]);
 
-    function handleLogin() {
-        setIsPopupOpen(true);
-    }
+  function closeAllPopups() {
+    setSigninPopupOpen(false);
+    setSignupPopupOpen(false);
+  }
 
-    return (
-        <div className='App'>
-            {/* <CurrentUserContext.Provider value={currentUser}> */}
-            {/* <AuthContext.Provider value={loggedIn}> */}
+  function handleLogin() {
+    setSigninPopupOpen(true);
+  }
 
-            {/* <PopupProvider> */}
-            {isPopupOpen ? (
-                <SigninForm 
-                closePopupHandler={closeAllPopups} 
-                />
-            ) : (
-                ''
-            )}
+  function handleSignupPopupSwitch(evt) {
+    evt.preventDefault();
+    closeAllPopups();
+    setSignupPopupOpen(true);
+  }
 
-            {/* </PopupProvider> */}
+  function handleSigninPopupSwitch(evt) {
+    evt.preventDefault();
+    closeAllPopups();
+    setSigninPopupOpen(true);
+  }
 
-            <Header isPopupOpen={handleLogin} onClose={closeAllPopups} />
+  return (
+    <div className="App">
+      {/* <CurrentUserContext.Provider value={currentUser}> */}
+      {/* <AuthContext.Provider value={loggedIn}> */}
 
-            <Routes>
-                <Route path='/' element={<Main />} />
+      {isSigninPopupOpen ? (
+        <SigninForm
+          closePopupHandler={closeAllPopups}
+          switchForm={handleSignupPopupSwitch}
+        />
+      ) : (
+        ""
+      )}
 
-                <Route path='/saved-news' element={<SavedNews />} />
-            </Routes>
+      {isSignupPopupOpen ? (
+        <SignupForm
+          closePopupHandler={closeAllPopups}
+          switchForm={handleSigninPopupSwitch}
+        />
+      ) : (
+        ""
+      )}
 
-            <Footer />
-            {/* </AuthContext.Provider> */}
-            {/* </CurrentUserContext.Provider> */}
-        </div>
-    );
+      <Header 
+      isSigninPopupOpen={handleLogin} 
+      onClose={closeAllPopups} />
+
+      <Routes>
+        <Route path="/" element={<Main />} />
+
+        <Route path="/saved-news" element={<SavedNews />} />
+      </Routes>
+
+      <Footer />
+      {/* </AuthContext.Provider> */}
+      {/* </CurrentUserContext.Provider> */}
+    </div>
+  );
 }
 
 export default App;
-

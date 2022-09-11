@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
-import { Router, Link, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import {Link, useLocation } from "react-router-dom";
 
 import Navigation from "../Navigation/Navigation";
-import SearchHeader from "../SearchHeader/SearchHeader";
+import HeaderWithSearch from "../HeaderWithSearch/HeaderWithSearch";
 
-import { AuthContext } from "../../contexts/AuthContext";
+// import { AuthContext } from "../../contexts/AuthContext";
 
 function Header(props) {
   // const loggedIn = useContext(AuthContext);
@@ -17,15 +17,15 @@ function Header(props) {
     <header
       className={
         location.pathname === "/saved-news"
-          ? "header header_no-image"
-          : "header header__main-page"
+          ? "header header_light-theme"
+          : "header header_dark-theme"
       }
     >
       <div
         className={
           isMobileButtonOpen 
           ?"header__wrapper header__wrapper_nav-open"
-          : "header__wrapper" 
+          : "header__wrapper"
     
         }
       >
@@ -35,7 +35,7 @@ function Header(props) {
               isMobileButtonOpen
                 ? "header__logo"
                 : location.pathname === "/saved-news"
-                ? "header__logo header__logo_dark"
+                ? "header__logo header__logo_theme_dark"
                 : "header__logo"
             }`}
             to="/"
@@ -56,7 +56,7 @@ function Header(props) {
             <button
               className={`header__mobile-button ${
                 location.pathname === "/saved-news" &&
-                "header__mobile-button_dark"
+                "header__mobile-button_theme_dark"
               }`}
               onClick={() => {
                 setMobileButtonOpen(true);
@@ -68,12 +68,12 @@ function Header(props) {
 
           <Navigation
             isMobileButtonOpen={isMobileButtonOpen}
-            isPopupOpen={props.isPopupOpen} 
+            isSigninPopupOpen={props.isSigninPopupOpen} 
           />
         </div>
       </div>
 
-      {!currentPath.includes(`/saved-news`) ? <SearchHeader /> : null}
+      {!currentPath.includes(`/saved-news`) ? <HeaderWithSearch /> : null}
     </header>
   );
 }

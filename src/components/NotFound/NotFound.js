@@ -8,9 +8,9 @@ function NotFound() {
       alt="not found">
       </img>
       <h3 className="not-found__title">Nothing Found</h3>
-      <span className="not-found__text">
+      <p className="not-found__text">
         Sorry, but nothing matched your search terms.
-      </span>
+      </p>
     </section>
   );
 }

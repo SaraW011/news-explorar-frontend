@@ -25,7 +25,7 @@
     font-size: 18px;
     line-height: 24px;
     color: #B6BCBF;
-    margin-bottom: 12px;
+    margin: 0 0 12px 0;
 }
 
 .news-card__title {
@@ -46,13 +46,13 @@
 
 .news-card__paragraph {
     width: 100%;
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 22px;
     color: #1A1B22;
-    margin-bottom: 18px;
+    margin: 0;
     min-height: 88px;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -60,7 +60,6 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     white-space: normal;
-    margin: 0;
     padding: 0;
 }
 
@@ -95,18 +94,26 @@
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
     font-size: 14px;
     font-weight: 500;
 }
 
-.news-card__button_type-bookmark {
+.news-card__button-bookmark {
     width: 40px;
     right: 24px;
     background-image: url('../../images/btn_bookmark.svg');
 }
 
-.news-card__button_type-keyword {
+.news-card__button-bookmark:hover {
+    background-image: url('../../images/btn_bookmark_hover.svg');
+}
+
+.news-card__button-bookmark:active {
+    background-image: url('../../images/btn_bookmark_selected.svg');
+}
+
+.news-card__button-keyword {
     left: 24px;
 }
 
@@ -151,17 +158,17 @@
     }
 
     .news-card__date {
-        margin-bottom: 12px;
+        margin: 0 0 12px 0;
     }
 
     .news-card__title {
         font-size: 22px;
         line-height: 24px;
-        margin-bottom: 10px;
+        margin: 0 0 10px 0;
     }
 
     .news-card__source {
-        margin-top: 12px;
+        margin: 12px 0 0 0;
         bottom: 16px;
     }
 
@@ -169,11 +176,11 @@
         top: 8px;
     }
 
-    .news-card__button_type-bookmark {
+    .news-card__button-bookmark {
         right: 8px;
     }
 
-    .news-card__button_type-keyword {
+    .news-card__button-keyword {
         left: 8px;
     }
 }
@@ -208,27 +215,27 @@
     }
 
     .news-card__date {
-        margin-bottom: 10px;
+        margin: 0 0 10px 0;
     }
 
     .news-card__title {
         -webkit-line-clamp: 2;
-        margin-bottom: 14px;
+        margin: 0 0 14px 0;
     }
 
     .news-card__source {
-        margin-top: 8px;
+        margin: 8px 0 0 0;
     }
 
     .news-card__button {
         top: 16px;
     }
 
-    .news-card__button_type-bookmark {
+    .news-card__button-bookmark {
         right: 16px;
     }
 
-    .news-card__button_type-keyword {
+    .news-card__button-keyword {
         left: 16px;
     }
 }

@@ -35,17 +35,21 @@
     height: 64px;
     border: none;
     border-radius: 80px;
-    background-color: #E8E8E8;
+    background-color: white;
     color: #1A1B22;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
     font-size: 18px;
     font-weight: 500;
     margin: 64px auto 80px auto;
     padding: 0;
+}
+
+.cards-list__btn:hover {
+    background-color: #E8E8E8;
 }
 
 @media screen and (max-width: 1200px) {

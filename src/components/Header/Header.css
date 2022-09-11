@@ -6,7 +6,7 @@
   background-position: center;
 }
 
-.header_no-image {
+.header_light-theme {
   background-image: none;
 }
 
@@ -40,7 +40,7 @@
   z-index: 999;
 }
 
-.header__logo_dark {
+.header__logo_theme_dark {
   color: #1A1B22;
 }
 
@@ -67,7 +67,7 @@
 
 /* 640 */
 @media screen and (max-width: 640px) {
-  .header__main-page {
+  .header_dark-theme {
     background-color: #1A1B22;
     height: 536px;
   }
@@ -98,7 +98,7 @@
     cursor: pointer;
   }
 
-  .header__mobile-button_dark {
+  .header__mobile-button_theme_dark {
     color: black;
 
   }

@@ -1,5 +1,4 @@
 import NewsCardList from "../NewsCardList/NewsCardList";
-import Header from "../Header/Header"
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader"
 
 function SavedNews() {

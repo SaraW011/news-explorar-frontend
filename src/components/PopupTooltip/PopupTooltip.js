@@ -3,18 +3,18 @@ import PopupWindow from "../PopupWindow/PopupWindow";
 
 function PopupTooltip() {
 
-  const [isPopupOpen, setIsPopupOpen] = useState();
+  const [isSigninPopupOpen, setSigninPopupOpen] = useState();
 
 
   return (
     <PopupWindow
-      isPopupOpen ={isPopupOpen}    
+      isSigninPopupOpen ={isSigninPopupOpen}    
         >
           
       <div className="tooltip">
         <button
           className="tooltip__btn-close"
-          onClick = {()=>{setIsPopupOpen(!isPopupOpen)}}
+          onClick = {()=>{setSigninPopupOpen(!isSigninPopupOpen)}}
           >
           &#10005;
         </button>

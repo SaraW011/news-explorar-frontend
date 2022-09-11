@@ -6,8 +6,8 @@ function SignupForm(props) {
       title={"Sign up"}
       buttonText={"Sign up"}
       linkTitle={"Sign in"}
-      isOpen = {props.isOpen}
-      onClose = {props.onClose}
+      closePopup={props.closePopupHandler}
+      switchFormBtn={props.switchForm}
     >
       <label className="popup__form-field-label">
         Email

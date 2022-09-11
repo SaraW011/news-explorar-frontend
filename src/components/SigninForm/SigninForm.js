@@ -1,12 +1,15 @@
-import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
+
+import PopupWithForm from '../PopupWithForm/PopupWithForm';
 function SigninForm(props) {
+
     return (
         <PopupWithForm
             title={'Sign in'}
             linkTitle={'Sign up'}
             buttonText={'Sign in'}
             closePopup={props.closePopupHandler}
+            switchFormBtn={props.switchForm}           
         >
             <label className='popup__form-field-label'>
                 Email

@@ -18,12 +18,12 @@
     text-decoration: none;
 }
 
-.nav__link-home_type-light {
+.nav__link-home_theme_light {
     color: white;
     border-bottom: solid 3px white;
 }
 
-.nav__link-home_type-dark {
+.nav__link-home_theme_dark {
     color: #1A1B22;
 }
 
@@ -55,7 +55,7 @@
     line-height: 24px;
 }
 
-.nav__login-button_type-dark {
+.nav__login-button_theme_dark {
     color: #1A1B22;
     outline-color: #1A1B22;
 }
