@@ -1,4 +1,4 @@
-.popup-window {
+.popup__form-backdrop {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -69,12 +69,12 @@
 }
 
 
-.popup-window_open {
+.popup__form-backdrop_open {
     display: inherit;
 }
 
 @media screen and (max-width: 540px) {
-    .popup-window {
+    .popup__form-backdrop {
         align-items: initial;
     }
 }

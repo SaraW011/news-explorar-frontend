@@ -1,6 +1,6 @@
 function PopupWindow(props) {
     return (
-        <div className={`popup-window popup-window_open`}>
+        <div className={`popup__form-backdrop popup__form-backdrop_open`}>
             {props.children}
             </div>
     );

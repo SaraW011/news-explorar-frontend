@@ -4,7 +4,7 @@ function NewsCardList() {
   return (
     <section className="cards-list">
       <div className="cards-list__wrapper">
-        <div className="cards-list__heading">Search Results</div>
+        <h2 className="cards-list__heading">Search Results</h2>
         <ul className="cards-list__container">
           <NewsCard></NewsCard>
         </ul>
