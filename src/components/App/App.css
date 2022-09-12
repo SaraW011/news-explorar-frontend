@@ -1,0 +1,16 @@
+.App {
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1440px;
+  min-width: 320px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .App {
+    max-width: 768px;
+  }
+}
