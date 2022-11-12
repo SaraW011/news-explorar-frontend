@@ -1,76 +1,42 @@
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
+import useForm from "../../hooks/useForm";
+import { signupForm } from "../../utils/formConfig";
 
 function SignupForm(props) {
+
+  const { renderFormInputs, isFormValid, form } = useForm(signupForm);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+      props.handleSignupSubmit({
+        email: form.email.value,
+        password: form.password.value,
+        name: form.name.value,
+      });
+  }
+
   return (
     <PopupWithForm
       title={"Sign up"}
-      buttonText={"Sign up"}
       linkTitle={"Sign in"}
       closePopup={props.closePopupHandler}
       switchFormBtn={props.switchForm}
+      handleSubmit={handleSubmit}
     >
-      <label className="popup__form-field-label">
-        Email
-        <input
-          className="popup__form-input"
-          placeholder="Enter email"
-          type="email"
-          required
-          value={props.email}
-          onChange={props.setEmail}
-        ></input>
-        <p
-          className={
-            props.isEmailError
-              ? "popup__form-input-err"
-              : "popup__form-input-err popup__form-input-err_active"
-          }
-        >
-          {props.isEmailErrorMsg}
-        </p>
-      </label>
+      {renderFormInputs()}
 
-      <label className="popup__form-field-label">
-        Password
-        <input
-          className="popup__form-input"
-          placeholder="Enter password"
-          type="password"
-          value={props.password}
-          onChange={props.setPassword}
-          required
-        ></input>
-        <p
-          className={
-            props.isPasswordError
-              ? "popup__form-input-err"
-              : "popup__form-input-err popup__form-input-err_active"
-          }
-        >
-          {props.isPasswordErrorMsg}
-        </p>
-      </label>
+      {props.conflictErr && <div className="popup__form-email-conflict">
+        This email is not available
+      </div>}
 
-      <label className="popup__form-field-label">
-        Username
-        <input
-          className="popup__form-input"
-          placeholder="Enter your username"
-          type="text"
-          value={props.username}
-          onChange={props.setUsername}
-          required
-        ></input>
-        <p
-          className={
-            props.isPasswordError
-              ? "popup__form-input-err"
-              : "popup__form-input-err popup__form-input-err_active"
-          }
-        >
-          {props.isPasswordErrorMsg}
-        </p>
-      </label>
+      <button
+        className="popup__form-submit-btn"
+        type="submit"
+        aria-label="submit-button"
+        disabled={!isFormValid()}
+      >
+        Sign up
+      </button>
     </PopupWithForm>
   );
 }

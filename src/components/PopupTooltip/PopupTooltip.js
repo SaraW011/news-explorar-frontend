@@ -1,27 +1,25 @@
-import { useState } from "react";
 import PopupWindow from "../PopupWindow/PopupWindow";
 
-function PopupTooltip() {
-
-  const [isSigninPopupOpen, setSigninPopupOpen] = useState();
-
-
+function PopupTooltip(props) {
   return (
-    <PopupWindow
-      isSigninPopupOpen ={isSigninPopupOpen}    
-        >
-          
-      <div className="tooltip">
+    <PopupWindow>
+      <div className="popup__tooltip">
         <button
-          className="tooltip__btn-close"
-          onClick = {()=>{setSigninPopupOpen(!isSigninPopupOpen)}}
-          >
+          type="button"
+          className="popup__tooltip-btn-close"
+          aria-label="close-button"
+          onClick={props.closePopupHandler}
+        >
           &#10005;
         </button>
-        <h2 className=" tooltip__title ">
+        <h2 className="popup__tooltip-title ">
           Registration successfully completed!
         </h2>
-        <p className="tooltip__link">Sign in</p>
+        <button 
+          className="popup__tooltip-switch-form" 
+          onClick={props.onSigninClick}>
+          Sign in
+        </button>
       </div>
     </PopupWindow>
   );

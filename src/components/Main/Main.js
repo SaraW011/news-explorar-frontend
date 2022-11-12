@@ -1,18 +1,32 @@
-import NotFound from "../NotFound/NotFound";
 import About from "../About/About";
+import NewsCardList from "../NewsCardList/NewsCardList";
+import NotFound from "../NotFound/NotFound";
+import Preloader from "../Preloader/Preloader";
 
-function Main() {
-  const currentPath = window.location.pathname;
-
+function Main({
+  searchedArticles,
+  savedArticles,
+  handleSaveArticle,
+  handleDeleteArticle,
+  preloader,
+  notFound,
+  setSigninPopupOpen,
+  showArticleSection
+}) {
   return (
-    <main className="main">
-      <section
-        className={
-          !currentPath.includes(`/saved-news`) ? "main__content" : null
-        }
-      ></section>
+    <main className='main'>
+      <section className={"main__content"}></section>
 
-      {!currentPath.includes(`/saved-news`) ? <NotFound /> : null}
+      {notFound && <NotFound />}
+      {preloader && <Preloader />}
+      <NewsCardList
+        searchedArticles={searchedArticles}
+        savedArticles={savedArticles}
+        handleSaveArticle={handleSaveArticle}
+        handleDeleteArticle={handleDeleteArticle}
+        setSigninPopupOpen={setSigninPopupOpen}
+        showArticleSection={showArticleSection}
+      />
 
       <About />
     </main>

@@ -1,5 +1,29 @@
-# news-explorer-frontend
-Stage 2: Markup and JSX Final Project, Yandex Practicum Masterschool
+# React Frontend News-Explorar App 
+## _Final Project : Practicum100 & Masterschool_
+
+* [Live page hosting Frontend.](https://newsarawsmn.students.nomoredomainssbs.ru)
+
+This React project was created with the passion for writing readable, organized and easy to read code, using DRY concepts,  as best as possible. Features of this project include: 
+## Design CSS and HTML Specs:
+
+- Responsive design 
+- BEM specifications
+- Semantic HTML
+- Flex and grid layouts
+- Infrastructural project files are created using CRA
+- Use of components wherever possible
+- SVG format icons and images / Raster and vector images have been optimized
+
+## React and JavaScript Specs:
+
+- Form implementation include: sign-up, sign-in and news-search forms with field validations 
+- Fetch requests to backend API: GET, POST, DELETE
+- Error handling 
+- Registration and authorization using the ProtectedRoute HOC component
+- JWT token stored in localStorage
+- React implementation of hooks, arrays and context provider. 
+- Asynchronous API XMLHttpRequest
+
 __________________________________________________________________________
 
 # Getting Started with Create React App

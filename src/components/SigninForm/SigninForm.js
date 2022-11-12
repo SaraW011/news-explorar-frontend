@@ -1,60 +1,38 @@
+import PopupWithForm from "../PopupWithForm/PopupWithForm";
+import useForm from "../../hooks/useForm";
+import { signinForm } from "../../utils/formConfig";
 
-
-import PopupWithForm from '../PopupWithForm/PopupWithForm';
 function SigninForm(props) {
+  const { isFormValid, renderFormInputs, form } = useForm(signinForm);
 
-    return (
-        <PopupWithForm
-            title={'Sign in'}
-            linkTitle={'Sign up'}
-            buttonText={'Sign in'}
-            closePopup={props.closePopupHandler}
-            switchFormBtn={props.switchForm}           
-        >
-            <label className='popup__form-field-label'>
-                Email
-                <input
-                    className='popup__form-input'
-                    placeholder='Enter email'
-                    type='email'
-                    required
-                    value={props.email}
-                    onChange={props.setEmail}
-                ></input>
-                <p
-                    className={
-                        props.isEmailError
-                            ? 'popup__form-input-err'
-                            : 'popup__form-input-err popup__form-input-err_active'
-                    }
-                >
-                    {props.isEmailErrorMsg}
-                </p>
-            </label>
+  function handleSubmit(event) {
+    event.preventDefault();
+    props.handleSigninSubmit({
+      email: form.email.value,
+      password: form.password.value,
+    });
+  }
 
-            <label className='popup__form-field-label'>
-                Password
-                <input
-                    className='popup__form-input'
-                    placeholder='Enter password'
-                    type='password'
-                    value={props.password}
-                    onChange={props.setPassword}
-                    required
-                ></input>
-                <p
-                    className={
-                        props.isPasswordError
-                            ? 'popup__form-input-err'
-                            : 'popup__form-input-err popup__form-input-err_active'
-                    }
-                >
-                    {props.isPasswordErrorMsg}
-                </p>
-            </label>
-        </PopupWithForm>
-    );
+  return (
+    <PopupWithForm
+      title={"Sign in"}
+      linkTitle={"Sign up"}
+      closePopup={props.closePopupHandler}
+      switchFormBtn={props.switchForm}
+      handleSubmit={handleSubmit}
+    >
+      {renderFormInputs()}
+
+      <button
+        className="popup__form-submit-btn"
+        type="submit"
+        aria-label="submit-button"
+        disabled={!isFormValid()}
+      >
+        Sign in
+      </button>
+    </PopupWithForm>
+  );
 }
 
 export default SigninForm;
-

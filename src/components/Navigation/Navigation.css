@@ -38,6 +38,12 @@
     text-decoration: none;
 }
 
+.nav__link-articles_theme_light {
+    color: white;
+    border-bottom: none;
+}
+
+
 .nav__login-button {
     padding: 0;
     margin: 0 0 0 32px;
@@ -61,8 +67,12 @@
 }
 
 
-.header__logout-button-icon {
-    background-image: url('../../images/icon_logout.svg');
+.nav__login-button:hover {
+    opacity: .7;
+}
+
+.nav__logout-button-icon {
+    background-image: url('../../images/icon_logout_w.svg');
     background-repeat: no-repeat;
     width: 24px;
     height: 24px;
@@ -70,6 +80,19 @@
     padding: 0;
     display: inline-flex;
     vertical-align: middle;
+    color: white;
+}
+
+.nav__logout-button-icon_theme_dark {
+    background-image: url('../../images/icon_logout_b.svg');
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    margin: 0 0 0 15px;
+    padding: 0;
+    display: inline-flex;
+    vertical-align: middle;
+    color: white;
 }
 
 

@@ -1,7 +1,7 @@
 import sadFace from "../../images/icon_not-found.svg";
 
 function NotFound() {
-  return (
+  return ( 
     <section className="not-found">
       <img className="not-found__image" 
       src={sadFace} 

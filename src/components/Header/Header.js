@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import {Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import Navigation from "../Navigation/Navigation";
 import HeaderWithSearch from "../HeaderWithSearch/HeaderWithSearch";
 
-// import { AuthContext } from "../../contexts/AuthContext";
-
 function Header(props) {
-  // const loggedIn = useContext(AuthContext);
+  const { handleSearchQuery, handleLogOut, isSigninPopupOpen } = props;
   const currentPath = window.location.pathname;
   const location = useLocation();
 
@@ -23,13 +21,12 @@ function Header(props) {
     >
       <div
         className={
-          isMobileButtonOpen 
-          ?"header__wrapper header__wrapper_nav-open"
-          : "header__wrapper"
-    
+          isMobileButtonOpen
+            ? "header__wrapper header__wrapper_nav-open"
+            : "header__wrapper"
         }
       >
-        <div className="header__items">
+        <div className='header__items'>
           <Link
             className={`${
               isMobileButtonOpen
@@ -38,14 +35,14 @@ function Header(props) {
                 ? "header__logo header__logo_theme_dark"
                 : "header__logo"
             }`}
-            to="/"
+            to='/'
           >
             NewsExplorer
           </Link>
 
           {isMobileButtonOpen ? (
             <button
-              className="header__mobile-button"
+              className='header__mobile-button'
               onClick={() => {
                 setMobileButtonOpen(false);
               }}
@@ -54,6 +51,7 @@ function Header(props) {
             </button>
           ) : (
             <button
+              type='button'
               className={`header__mobile-button ${
                 location.pathname === "/saved-news" &&
                 "header__mobile-button_theme_dark"
@@ -68,12 +66,15 @@ function Header(props) {
 
           <Navigation
             isMobileButtonOpen={isMobileButtonOpen}
-            isSigninPopupOpen={props.isSigninPopupOpen} 
+            isSigninPopupOpen={isSigninPopupOpen}
+            handleLogOut={handleLogOut}
           />
         </div>
       </div>
 
-      {!currentPath.includes(`/saved-news`) ? <HeaderWithSearch /> : null}
+      {!currentPath.includes(`/saved-news`) ? (
+        <HeaderWithSearch handleSearchQuery={handleSearchQuery} />
+      ) : null}
     </header>
   );
 }

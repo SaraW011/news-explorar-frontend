@@ -109,7 +109,22 @@
     background-image: url('../../images/btn_bookmark_hover.svg');
 }
 
-.news-card__button-bookmark:active {
+.news-card__button-bookmark_active {
+    background-image: url('../../images/btn_bookmark_selected.svg');
+}
+
+.news-card__button-trash {
+    width: 40px;
+    right: 24px;
+    background-image: url('../../images/btn_trash.svg');
+}
+
+.news-card__button-trash:hover {
+    background-image: url('../../images/btn_trash_hover.svg');
+}
+
+.news-card__button_nohover {
+    pointer-events: none;
     background-image: url('../../images/btn_bookmark_selected.svg');
 }
 
@@ -138,7 +153,7 @@
     visibility: hidden;
 }
 
-.news-card__message:hover {
+.news-card__message_visible {
     visibility: visible;
 }
 
