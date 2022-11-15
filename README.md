@@ -1,7 +1,7 @@
 # React Frontend News-Explorar App 
 ## _Final Project : Practicum100 & Masterschool_
 
-* [Live page hosting Frontend.](https://newsarawsmn.students.nomoredomainssbs.ru)
+* [Live page hosting Frontend.](https://newsw.students.nomoredomainssbs.ru)
 
 This React project was created with the passion for writing readable, organized and easy to read code, using DRY concepts,  as best as possible. Features of this project include: 
 ## Design CSS and HTML Specs:
