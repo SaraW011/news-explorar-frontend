@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "npm run build && scp -r ./build/* sarawsmn@newsarawsmn.students.nomoredomainssbs.ru:/home/sarawsmn/frontend"
+    "deploy": "npm run build && scp -r ./build/* sarawsmn@newsw.students.nomoredomainssbs.ru:/home/sarawsmn/frontend"
   },
   "eslintConfig": {
     "extends": [

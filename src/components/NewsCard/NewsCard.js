@@ -10,7 +10,7 @@ function NewsCard(props) {
     handleDeleteArticle,
     handleSaveArticle,
     setSigninPopupOpen,
-    showArticleSection
+    showArticleSection,
   } = props;
 
   const loggedIn = useContext(AuthContext);
@@ -43,15 +43,15 @@ function NewsCard(props) {
   const publishedAt =
     months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
 
-  const handleMouseOver = () => {
+  function handleMouseOver() {
     setOnMouseHover(true);
     setShowMessage(true);
-  };
+  }
 
-  const handleMouseLeave = () => {
+  function handleMouseLeave() {
     setOnMouseHover(false);
     setShowMessage(false);
-  };
+  }
 
   // keep saved article marked as saved:
   useEffect(() => {
@@ -91,73 +91,75 @@ function NewsCard(props) {
     }
   }
 
-  return ( showArticleSection &&
-    <>
-      <li className='news-card'>
-        <button
-          className={`${
-            savedNesPage
-              ? `news-card__button news-card__button-trash`
-              : `news-card__button news-card__button-bookmark `
-          } ${
-            mainPage
-              ? `news-card__button news-card__button-bookmark ${
-                  savedCard && "news-card__button-bookmark_active"
-                }`
-              : `news-card__button-bookmark_nohover`
-          }`}
-          aria-label='card take-action button'
-          onMouseOver={handleMouseOver}
-          onMouseLeave={handleMouseLeave}
-          onClick={mainPage ? handleSaveClick : handleDeleteClick}
-        ></button>
-
-        {savedNesPage && (
+  return (
+    showArticleSection && (
+      <>
+        <li className='news-card'>
           <button
-            className='news-card__button news-card__button-keyword'
-            aria-label='article keyword'
-          >
-            {articles.keyword}
-          </button>
-        )}
-
-        {!loggedIn ? (
-          <p
-            className={`news-card__message ${
-              onMouseHover ? "news-card__message_visible" : ""
+            className={`${
+              savedNesPage
+                ? `news-card__button news-card__button-trash`
+                : `news-card__button news-card__button-bookmark `
+            } ${
+              mainPage
+                ? `news-card__button news-card__button-bookmark ${
+                    savedCard && "news-card__button-bookmark_active"
+                  }`
+                : `news-card__button-bookmark_nohover`
             }`}
-          >
-            {" "}
-            Sign in to save articles
-          </p>
-        ) : (
-          savedNesPage && (
+            aria-label='card take-action button'
+            onMouseOver={handleMouseOver}
+            onMouseLeave={handleMouseLeave}
+            onClick={mainPage ? handleSaveClick : handleDeleteClick}
+          ></button>
+
+          {savedNesPage && (
+            <button
+              className='news-card__button news-card__button-keyword'
+              aria-label='article keyword'
+            >
+              {articles.keyword}
+            </button>
+          )}
+
+          {!loggedIn ? (
             <p
               className={`news-card__message ${
                 onMouseHover ? "news-card__message_visible" : ""
               }`}
             >
               {" "}
-              Remove from saved
+              Sign in to save articles
             </p>
-          )
-        )}
+          ) : (
+            savedNesPage && (
+              <p
+                className={`news-card__message ${
+                  onMouseHover ? "news-card__message_visible" : ""
+                }`}
+              >
+                {" "}
+                Remove from saved
+              </p>
+            )
+          )}
 
-        <a href={articles.link} target='_blank' rel='noreferrer'>
-          <img
-            className='news-card__image'
-            src={articles.image}
-            alt={articles.title}
-          />
-        </a>
-        <div className='news-card__info'>
-          <h2 className='news-card__date'>{publishedAt}</h2>
-          <h3 className='news-card__title'>{articles.title}</h3>
-          <p className='news-card__paragraph'>{articles.text}</p>
-          <h4 className='news-card__source'>{articles.source}</h4>
-        </div>
-      </li>
-    </>
+          <a href={articles.link} target='_blank' rel='noreferrer'>
+            <img
+              className='news-card__image'
+              src={articles.image}
+              alt={articles.title}
+            />
+          </a>
+          <div className='news-card__info'>
+            <h2 className='news-card__date'>{publishedAt}</h2>
+            <h3 className='news-card__title'>{articles.title}</h3>
+            <p className='news-card__paragraph'>{articles.text}</p>
+            <h4 className='news-card__source'>{articles.source}</h4>
+          </div>
+        </li>
+      </>
+    )
   );
 }
 

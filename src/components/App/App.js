@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
@@ -35,40 +36,6 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  //*** AUTH FUNCTIONS ***=================================
-
-  // keep user logged in when token is set:
-  useEffect(() => {
-    (async () => {
-      try {
-        const user = await mainApi.checkToken(localStorage.getItem("jwt").jwt);
-        if (user) {
-          setCurrentUser({ name: user.name });
-          setLoggedIn(true);
-          mainApi.getUserInfo();
-          console.log(user.name);
-        }
-        const articlesFromDb = await mainApi.getSavedArticles();
-        if (articlesFromDb !== 0) {
-          setSavedArticles(articlesFromDb);
-        }
-        if (location.pathname === "/saved-news") {
-          setShowArticleSection(true);
-        }
-      } catch {
-        return;
-      }
-    })();
-    setSearchedArticles(JSON.parse(localStorage.getItem("articles")) || []);
-  }, [loggedIn, location.pathname]);
-
-  // keep last search results live:
-  useEffect(() => {
-    if (localStorage.getItem("articles")) {
-      setShowArticleSection(true);
-    }
-  }, []);
-
   //*** USER FUNCTIONS ***=================================
 
   // signup:
@@ -76,8 +43,9 @@ function App() {
     try {
       const userData = await mainApi.signup(data);
       if (userData) {
+        console.log("one moment... your accont is beeing created ❥")
         setIsTooltipOpen(true);
-        // console.log("Sign Up Data:", data);
+        console.log("Sign Up Data:", data);
         // console.log("Sign Up currentUser is:", currentUser);
         console.log(userData.name, "you are now a special member");
         setSignupPopupOpen(false);
@@ -90,8 +58,6 @@ function App() {
           setConflictErr(false);
         }, 2000);
       }
-      setIsTooltipOpen(false);
-      return;
     }
   }
 
@@ -102,8 +68,9 @@ function App() {
       const token = await mainApi.signin(data);
       if (token) {
         setLoggedIn(true);
-        window.location.reload();
+        navigate("/", { replace: true });
         setSigninPopupOpen(false);
+        navigate(0);
       }
     } catch (res) {
       window.alert("You have entered an invalid username or password");
@@ -111,17 +78,38 @@ function App() {
     }
   }
 
+  // keep user logged in when token is set:
+  useEffect(() => {
+    (async () => {
+      try {
+        const user = await mainApi.checkToken(
+          // ".value" prevents 500 error when logged out:
+          localStorage.getItem("jwt").value
+        );
+        if (user) {
+          setCurrentUser({ name: user.name });
+          setLoggedIn(true);
+          mainApi.getUserInfo();
+          // console.log(user.name);
+        }
+      } catch {
+        return;
+      }
+    })();
+  }, [loggedIn]);
+
+  // logout:
   function handleLogOut() {
-    navigate("/");
     localStorage.removeItem("jwt");
     localStorage.removeItem("keyword");
     localStorage.removeItem("articles");
-
     setLoggedIn(false);
+    navigate("/");
     setShowArticleSection(false);
   }
 
-  // ========>>>  CARDS FUNCTIONALITY ==========//
+
+  // ======== ***  CARDS FUNCTIONALITY ==========//
 
   // search for news by keyword
   async function handleSearchQuery(event, topic) {
@@ -166,7 +154,6 @@ function App() {
       }
     } catch (err) {
       console.log(err);
-      if (!loggedIn) console.log("error while saving article");
     }
   }
 
@@ -180,36 +167,37 @@ function App() {
       }
     } catch (err) {
       console.log(err);
-      window.location.reload();
+      setSavedArticles([]);
     }
   }
 
-  // ========>>>  POPUP FUNCTIONALITY ==========//
-
+  // get user's saved articles:
   useEffect(() => {
-    const closeByEscape = (e) => {
-      if (e.key === "Escape") {
-        closeAllPopups();
-      }
-    };
+    if (location.pathname === "/saved-news") {
+      setShowArticleSection(true);
+    } else if (!localStorage.getItem("articles")) {
+      setShowArticleSection(false);
+    }
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      mainApi
+        .getSavedArticles()
+        .then((res) => {
+          setSavedArticles(res);
+        })
+        .catch(console.log);
+    }
+  }, [location.pathname]);
 
-    document.addEventListener("keydown", closeByEscape);
-
-    return () => document.removeEventListener("keydown", closeByEscape);
+  // keep last search results live:
+  useEffect(() => {
+    if (localStorage.getItem("articles")) {
+      setShowArticleSection(true);
+    }
+    setSearchedArticles(JSON.parse(localStorage.getItem("articles")) || []);
   }, []);
 
-  useEffect(() => {
-    const closeByClick = (e) => {
-      if (e.target.classList.contains("popup__form-backdrop_open")) {
-        closeAllPopups();
-      }
-    };
-
-    document.addEventListener("click", closeByClick);
-
-    return () => document.removeEventListener("click", closeByClick);
-  }, []);
-
+  // ======== *** MODALS FUNCTIONALITY ==========//
   function closeAllPopups() {
     setSigninPopupOpen(false);
     setSignupPopupOpen(false);
@@ -233,6 +221,14 @@ function App() {
     setSigninPopupOpen(true);
     setIsTooltipOpen(false);
   }
+
+  // redirect to login page if protected route is true:
+  useEffect(() => {
+    if (!loggedIn && location.pathname === "/saved-news") {
+      navigate("/")
+      setSigninPopupOpen(true)
+    }
+  }, [loggedIn, location.pathname, navigate]);
 
   return (
     <div className='App'>
@@ -301,7 +297,6 @@ function App() {
               }
             />
           </Routes>
-
           <Footer />
         </AuthContext.Provider>
       </CurrentUserContext.Provider>

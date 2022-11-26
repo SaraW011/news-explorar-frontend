@@ -1,6 +1,6 @@
-//NEWS_API replaced with PROXY_API for live server access from newsarawsmn.students.nomoredomainssbs.ru: 
+//NEWS_API replaced with PROXY_API for live server access from newsarawsmn.students.nomoredomainssbs.ru:
 import { API_KEY, PROXY_API } from "./constants";
-const getNewsApi = async (keyword) => {
+async function getNewsApi(keyword) {
   let date = new Date();
   const [year, month, day] = [
     date.getFullYear(),
@@ -20,6 +20,6 @@ const getNewsApi = async (keyword) => {
     return Promise.reject(`NewsAPI Error: 
     ${res.status} ${res.statusText}`);
   }
-};
+}
 
 export { getNewsApi };
