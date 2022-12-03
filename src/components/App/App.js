@@ -62,7 +62,6 @@ function App() {
   }
 
   // login:
-  // login:
   async function handleSigninSubmit(data) {
     try {
       //mainApi sets up the "jwt" token:
