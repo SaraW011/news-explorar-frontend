@@ -1,0 +1,144 @@
+.footer {
+  width: 100%;
+  max-width: 1440px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  background-color: white;
+  margin: 0 auto;
+}
+
+.footer__wrapper {
+  width: calc(100% - 208px);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.footer__copyright {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: left;
+  color: #B6BCBF;
+  margin: 32px auto 26px 0;
+  width: 433px;
+  box-sizing: border-box;
+}
+
+.footer__link {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #1A1B22;
+  font-size: 18px;
+  line-height: 24px;
+  cursor: pointer;
+  margin: 30px 0 26px 0;
+}
+
+.footer__link-home {
+  text-decoration: none;
+}
+
+.footer__link-practicum {
+  text-decoration: none;
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
+.footer__github {
+  padding: 0;
+}
+
+.footer__facebook {
+  padding: 0 0 0 24px;
+}
+
+
+@media screen and (max-width: 1200px) {
+  .footer__wrapper {
+    width: calc(100% - 80px);
+  }
+}
+
+
+/*768*/
+@media screen and (max-width: 768px) {
+  .footer__copyright {
+    margin: 24px auto 18px 0;
+    width: 300px;
+  }
+
+  .footer__link {
+    margin: 21px 0 19px 0;
+  }
+
+  .footer__link-practicum {
+    margin-right: 40px;
+    margin-left: 40px;
+  }
+}
+
+
+@media screen and (max-width: 720px) {
+  .footer {
+    height: 176px;
+    display: grid;
+  }
+
+  .footer__wrapper {
+    max-height: 176px;
+    margin-top: 20px;
+    grid-template-columns: auto auto 44px 44px;
+    display: grid;
+    grid-template-areas:
+      "home . git fb"
+      "prc prc prc prc"
+      "copyr copyr copyr copyr";
+  }
+
+  .footer__link {
+    flex-direction: row;
+  }
+
+  .footer__link-home {
+    grid-area: home;
+    margin: 0;
+  }
+
+  .footer__github {
+    grid-area: git;
+    justify-self: end;
+    margin: 0;
+  }
+
+  .footer__facebook {
+    grid-area: fb;
+    justify-self: end;
+    margin: 0;
+  }
+
+  .footer__link-practicum {
+    grid-area: prc;
+    margin: 16px 0 0 0;
+  }
+
+  .footer__copyright {
+    grid-area: copyr;
+    margin: 40px 0 0 0;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .footer__wrapper {
+    width: calc(100% - 32px);
+    margin: 0 16px 22px 16px;
+  }
+}
