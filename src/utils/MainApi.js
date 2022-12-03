@@ -46,22 +46,15 @@ ${res.status} ${res.statusText}`);
       headers: this._headers,
       body: JSON.stringify({ email: email, password: password }),
     });
+    console.log(user.name);
     localStorage.setItem("jwt", user.token);
     return user;
-  }
-
-
-  // Get user info from server:
-  getUserInfo() {
-    return this._request(`/users/me`, {
-      headers: this._headers,
-    });
   }
 
   checkToken() {
     return this._request(`/users/me`, {
       headers: this._headers,
-    }).then((data) => data);
+    });
   }
 
   ////////============== CARD FUNCTIONS ================ //////////

@@ -43,7 +43,7 @@ function App() {
     try {
       const userData = await mainApi.signup(data);
       if (userData) {
-        console.log("one moment... your accont is beeing created ❥")
+        console.log("one moment... your accont is beeing created ❥");
         setIsTooltipOpen(true);
         console.log("Sign Up Data:", data);
         // console.log("Sign Up currentUser is:", currentUser);
@@ -62,13 +62,13 @@ function App() {
   }
 
   // login:
+  // login:
   async function handleSigninSubmit(data) {
     try {
       //mainApi sets up the "jwt" token:
       const token = await mainApi.signin(data);
       if (token) {
         setLoggedIn(true);
-        navigate("/", { replace: true });
         setSigninPopupOpen(false);
         navigate(0);
       }
@@ -80,23 +80,20 @@ function App() {
 
   // keep user logged in when token is set:
   useEffect(() => {
-    (async () => {
-      try {
-        const user = await mainApi.checkToken(
-          // ".value" prevents 500 error when logged out:
-          localStorage.getItem("jwt").value
-        );
-        if (user) {
-          setCurrentUser({ name: user.name });
-          setLoggedIn(true);
-          mainApi.getUserInfo();
-          // console.log(user.name);
-        }
-      } catch {
-        return;
-      }
-    })();
-  }, [loggedIn]);
+    const token = localStorage.getItem("jwt");
+    if (!token) return;
+    // console.log(token)
+    mainApi
+      .checkToken(token)
+      .then((res) => {
+        setCurrentUser({ name: res.name });
+        setLoggedIn(true);
+      })
+      .catch((err) => {
+        setLoggedIn(false);
+        console.log(err);
+      });
+  }, [loggedIn, setCurrentUser]);
 
   // logout:
   function handleLogOut() {
@@ -107,7 +104,6 @@ function App() {
     navigate("/");
     setShowArticleSection(false);
   }
-
 
   // ======== ***  CARDS FUNCTIONALITY ==========//
 
@@ -222,18 +218,10 @@ function App() {
     setIsTooltipOpen(false);
   }
 
-  // redirect to login page if protected route is true:
-  useEffect(() => {
-    if (!loggedIn && location.pathname === "/saved-news") {
-      navigate("/")
-      setSigninPopupOpen(true)
-    }
-  }, [loggedIn, location.pathname, navigate]);
-
   return (
-    <div className='App'>
-      <CurrentUserContext.Provider value={currentUser}>
-        <AuthContext.Provider value={loggedIn}>
+    <CurrentUserContext.Provider value={currentUser}>
+      <AuthContext.Provider value={loggedIn}>
+        <div className='App'>
           {isSigninPopupOpen ? (
             <SigninForm
               handleSigninSubmit={handleSigninSubmit}
@@ -286,7 +274,10 @@ function App() {
             <Route
               path='/saved-news'
               element={
-                <ProtectedRoute>
+                <ProtectedRoute
+                  setSigninPopupOpen={setSigninPopupOpen}
+                  loggedIn={loggedIn}
+                >
                   <SavedNews
                     searchedArticles={searchedArticles}
                     savedArticles={savedArticles}
@@ -298,9 +289,9 @@ function App() {
             />
           </Routes>
           <Footer />
-        </AuthContext.Provider>
-      </CurrentUserContext.Provider>
-    </div>
+        </div>
+      </AuthContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 

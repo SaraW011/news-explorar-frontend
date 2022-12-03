@@ -59,6 +59,8 @@ function NewsCard(props) {
       savedArticles.forEach((element) => {
         if (element.title === articles.title) {
           setSavedCard(true);
+        } else if (localStorage.keyword !== element.keyword) {
+          setSavedCard(false);
         }
       });
     }
